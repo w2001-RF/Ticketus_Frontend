@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Ticket } from '../models/ticket.model';
 import { TicketResponse } from '../models/ticket-response.model';
 import { environment } from '../../environments/environment';
@@ -24,9 +24,8 @@ export class TicketService {
       .set('Content-Type', 'application/json');
   }
 
-  getTickets(): Observable<Ticket[]> {
+  getTickets(): Observable<TicketResponse> {
     return this.http.get<TicketResponse>(this.apiUrl, { headers: this.getHeaders() }).pipe(
-      map((response: TicketResponse) => response.tickets),
       catchError(this.handleError)
     );
   }
