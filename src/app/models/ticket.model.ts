@@ -1,6 +1,6 @@
 export interface Ticket {
-    ticketId?: number;
+    ticketId: number;
     description: string;
     status: string;
-    dateCreated?: Date;
+    dateCreated: Date;
   }
