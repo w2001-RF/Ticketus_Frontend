@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Ticket } from '../models/ticket.model';
+import { TicketResponse } from '../models/ticket-response.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -13,16 +14,19 @@ export class TicketService {
   private endPointTickets: string = "/Tickets"
 
   constructor(private http: HttpClient) { 
-    this.apiUrl = environment.backendUrl + this.endPointTickets;
+    this.apiUrl = environment.backendUrl + this.endPointTickets; console.log(this.apiUrl)
   }
 
   getHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-Type', 'application/json');
   }
 
   getTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.apiUrl, { headers: this.getHeaders() }).pipe(
+    return this.http.get<TicketResponse>(this.apiUrl, { headers: this.getHeaders() }).pipe(
+      map((response: TicketResponse) => response.tickets),
       catchError(this.handleError)
     );
   }
