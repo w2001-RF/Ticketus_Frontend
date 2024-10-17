@@ -24,8 +24,8 @@ export class TicketService {
     return this.http.get<Ticket[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
-  getTicket(id: number): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.apiUrl, { headers: this.getHeaders() });
+  getTicket(id: number): Observable<Ticket> {
+    return this.http.get<Ticket>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 
   createTicket(ticket: Ticket): Observable<Ticket> {
