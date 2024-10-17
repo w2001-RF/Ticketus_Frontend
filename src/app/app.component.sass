@@ -1,0 +1,12 @@
+$content-padding: 20px
+$toolbar-height: 64px
+$z-index-toolbar: 1000
+
+.content
+  padding: $content-padding
+  min-height: calc(100vh - 2 * $toolbar-height)
+
+mat-toolbar
+  position: sticky
+  top: 0
+  z-index: $z-index-toolbar
