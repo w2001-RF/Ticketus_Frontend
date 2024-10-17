@@ -20,6 +20,7 @@ export class TicketListComponent implements OnInit {
   pageSize: number = 5;
   pageNumber: number = 1;
   searchQuery: string = "";
+  noTicketsMessage: boolean = false;
 
   dataSource = new MatTableDataSource<Ticket>();
   displayedColumns: string[] = ['ticketId', 'description', 'status', 'dateCreated', 'actions'];
@@ -40,6 +41,7 @@ export class TicketListComponent implements OnInit {
         this.pageSize = ticketResponse.pageSize;
         this.pageNumber = ticketResponse.pageNumber;
         this.dataSource.data = this.tickets;
+        this.noTicketsMessage = this.tickets.length === 0;
 
         if (this.sort) {
           this.dataSource.sort = this.sort;
@@ -63,6 +65,7 @@ export class TicketListComponent implements OnInit {
       if (result) {
         this.ticketService.deleteTicket(ticketId).subscribe(() => {
           this.tickets = this.tickets.filter(ticket => ticket.ticketId !== ticketId);
+          this.noTicketsMessage = this.tickets.length === 0;
         });
       }
     });
