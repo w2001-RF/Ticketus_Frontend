@@ -58,7 +58,20 @@ export class TicketListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadTickets();  // Refresh the ticket list after adding a new ticket
+        this.loadTickets();
+      }
+    });
+  }
+
+  openEditDialog(ticket: Ticket): void {
+    const dialogRef = this.dialog.open(TicketFormComponent, {
+      width: '400px',
+      data: { ticket }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadTickets();
       }
     });
   }
