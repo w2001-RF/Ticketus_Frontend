@@ -9,10 +9,10 @@ import { environment } from '../../environments/environment';
 })
 export class TicketService {
   private apiUrl: string;
-  private endPointAuthentication: string = "Tickets"
+  private endPointAuthentication: string = "/Tickets"
 
   constructor(private http: HttpClient) { 
-    this.apiUrl = environment.backendUrl;
+    this.apiUrl = environment.backendUrl + this.endPointAuthentication;
   }
 
   getHeaders(): HttpHeaders {

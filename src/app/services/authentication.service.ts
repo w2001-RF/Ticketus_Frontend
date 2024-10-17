@@ -9,10 +9,10 @@ import { environment } from '../../environments/environment';
 export class AuthenticationService {
 
   private apiUrl: string;
-  private endPointAuthentication: string = "Authentication"
+  private endPointAuthentication: string = "/Authentication"
 
   constructor(private http: HttpClient) { 
-    this.apiUrl = environment.backendUrl;
+    this.apiUrl = environment.backendUrl + this.endPointAuthentication;
   }
 
   isLoggedIn(): boolean {
@@ -22,11 +22,19 @@ export class AuthenticationService {
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, data);
+    return this.http.post(`${this.apiUrl}/login`, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 
   signup(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signup`, data);
+    return this.http.post(`${this.apiUrl}/signup`, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 
   saveToken(token: string): void {
@@ -34,7 +42,7 @@ export class AuthenticationService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('authToken');   
   }
 
   clearToken(): void {
