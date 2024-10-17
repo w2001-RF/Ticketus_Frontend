@@ -11,12 +11,26 @@ import { TicketDeleteDialogComponent } from '../ticket-delete-dialog/ticket-dele
 })
 export class TicketListComponent implements OnInit {
   tickets: Ticket[] = [];
+  totalCount: number = 0;
+  pageSize: number = 10;
+  pageNumber: number = 1;
 
   constructor(private ticketService: TicketService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.ticketService.getTickets().subscribe(data => {
-      this.tickets = data;
+    console.log("ngOnInit is running");
+    this.loadTickets();
+    console.log(this.tickets)
+  }
+
+  loadTickets(): void {
+    this.ticketService.getTickets().subscribe({
+      next: (tickets) => {
+        this.tickets = tickets;
+      },
+      error: (err) => {
+        console.error('Error loading tickets:', err);
+      }
     });
   }
 
@@ -29,7 +43,7 @@ export class TicketListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.ticketService.deleteTicket(ticketId).subscribe(() => {
-          this.tickets = this.tickets.filter(ticket => ticket.id !== ticketId);
+          this.tickets = this.tickets.filter(ticket => ticket.ticketId !== ticketId);
         });
       }
     });
