@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren: () => import('./tickets/tickets.module').then(m => m.TicketsModule),
     canActivate: [AuthGuard]
   },
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/auth/login' }
+  { path: '', redirectTo: '/tickets', pathMatch: 'full' },
+  { path: '**', redirectTo: '/tickets' }
 ];
 
 @NgModule({
