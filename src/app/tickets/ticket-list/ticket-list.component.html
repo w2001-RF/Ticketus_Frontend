@@ -31,5 +31,7 @@
       <tr mat-header-row *matHeaderRowDef="['ticketId', 'description', 'status', 'dateCreated', 'actions']"></tr>
       <tr mat-row *matRowDef="let row; columns: ['ticketId', 'description', 'status', 'dateCreated', 'actions']"></tr>
     </table>
+
+    <button mat-raised-button color="primary" (click)="openAddDialog()">Add New Ticket</button>
 </mat-card>
   

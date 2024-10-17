@@ -1,56 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TicketService } from '../../services/ticket.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Ticket } from '../../models/ticket.model';
+import { TicketService } from '../../services/ticket.service';
 
 @Component({
   selector: 'app-ticket-form',
   templateUrl: './ticket-form.component.html',
   styleUrls: ['./ticket-form.component.sass']
 })
-export class TicketFormComponent implements OnInit {
+export class TicketFormComponent  {
   ticketForm: FormGroup;
-  ticketId?: number;
 
   constructor(
     private fb: FormBuilder,
-    private ticketService: TicketService,
-    private route: ActivatedRoute,
-    private router: Router
+    private dialogRef: MatDialogRef<TicketFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { ticket: Ticket | null },
+    private ticketService: TicketService
   ) {
     this.ticketForm = this.fb.group({
-      description: ['', Validators.required],
-      status: ['', Validators.required]
+      description: [data?.ticket?.description || '', Validators.required],
+      status: [data?.ticket?.status || '', Validators.required]
     });
   }
 
-  ngOnInit(): void {
-    this.ticketId = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (this.ticketId) {
-      // Edit mode
-      this.ticketService.getTicket(this.ticketId).subscribe(ticket => {
-        this.ticketForm.patchValue(ticket);
-      });
-    }
-  }
-
-  onSubmit(): void {
+  onSave(): void {
     if (this.ticketForm.valid) {
-      const ticketData: Ticket = this.ticketForm.value;
-
-      if (this.ticketId) {
-        // Update existing ticket
-        this.ticketService.updateTicket(this.ticketId, ticketData).subscribe(() => {
-          this.router.navigate(['/tickets']);
+      if (this.data.ticket) {
+        // Update the ticket if editing
+        this.ticketService.updateTicket(this.data.ticket.ticketId, this.ticketForm.value).subscribe(() => {
+          this.dialogRef.close(true);
         });
       } else {
-        // Create new ticket
-        this.ticketService.createTicket(ticketData).subscribe(() => {
-          this.router.navigate(['/tickets']);
+        // Create a new ticket if adding
+        const newTicket: Ticket = { ...this.ticketForm.value, dateCreated: new Date() };
+        this.ticketService.createTicket(newTicket).subscribe(() => {
+          this.dialogRef.close(true);
         });
       }
     }
+  }
+
+  onCancel(): void {
+    this.dialogRef.close();
   }
 }

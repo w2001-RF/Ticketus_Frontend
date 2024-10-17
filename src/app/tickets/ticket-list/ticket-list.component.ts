@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TicketService } from '../../services/ticket.service';
 import { Ticket } from '../../models/ticket.model';
 import { TicketDeleteDialogComponent } from '../ticket-delete-dialog/ticket-delete-dialog.component';
+import { TicketFormComponent } from '../ticket-form/ticket-form.component';
 
 @Component({
   selector: 'app-ticket-list',
@@ -45,6 +46,19 @@ export class TicketListComponent implements OnInit {
         this.ticketService.deleteTicket(ticketId).subscribe(() => {
           this.tickets = this.tickets.filter(ticket => ticket.ticketId !== ticketId);
         });
+      }
+    });
+  }
+
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(TicketFormComponent, {
+      width: '400px',
+      data: { ticket: null }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadTickets();  // Refresh the ticket list after adding a new ticket
       }
     });
   }
