@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+    <span>Ticketus</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/tickets" *ngIf="isAuthenticated()">Tickets</button>
+    <button mat-button (click)="logout()" *ngIf="isAuthenticated()">Logout</button>
+</mat-toolbar>
+  
