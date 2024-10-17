@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Ticket } from '../models/ticket.model';
 import { environment } from '../../environments/environment';
 
@@ -9,10 +10,10 @@ import { environment } from '../../environments/environment';
 })
 export class TicketService {
   private apiUrl: string;
-  private endPointAuthentication: string = "/Tickets"
+  private endPointTickets: string = "/Tickets"
 
   constructor(private http: HttpClient) { 
-    this.apiUrl = environment.backendUrl + this.endPointAuthentication;
+    this.apiUrl = environment.backendUrl + this.endPointTickets;
   }
 
   getHeaders(): HttpHeaders {
@@ -21,23 +22,44 @@ export class TicketService {
   }
 
   getTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.apiUrl, { headers: this.getHeaders() });
+    return this.http.get<Ticket[]>(this.apiUrl, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getTicket(id: number): Observable<Ticket> {
-    return this.http.get<Ticket>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+    return this.http.get<Ticket>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   createTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(this.apiUrl, ticket, { headers: this.getHeaders() });
+    return this.http.post<Ticket>(this.apiUrl, ticket, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   updateTicket(id: number, ticket: Ticket): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, ticket, { headers: this.getHeaders() });
+    return this.http.put<void>(`${this.apiUrl}/${id}`, ticket, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   deleteTicket(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
   }
   
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      console.error('Client-side error:', error.error.message);
+    } else {
+      // Server-side error
+      console.error(`Server-side error: ${error.status} ${error.message}`);
+    }
+    return throwError('Something went wrong with the request. Please try again later.');
+  }
 }

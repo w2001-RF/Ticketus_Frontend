@@ -10,6 +10,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -17,18 +18,19 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
+      console.log(this.loginForm.value)
       this.authService.login(this.loginForm.value).subscribe(response => {
         this.authService.saveToken(response.token);
         this.router.navigate(['/tickets']);
       }, error => {
-        console.error('Login failed:', error);
+        this.errorMessage = error;
       });
     }
   }

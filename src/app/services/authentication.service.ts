@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -26,7 +27,9 @@ export class AuthenticationService {
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   signup(data: any): Observable<any> {
@@ -34,7 +37,9 @@ export class AuthenticationService {
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   saveToken(token: string): void {
@@ -47,6 +52,15 @@ export class AuthenticationService {
 
   clearToken(): void {
     localStorage.removeItem('authToken');
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Client-side error:', error.error.message);
+    } else {
+      console.error(`Server-side error: ${error.status} ${error.message}`);
+    }
+    return throwError('Something went wrong with the request. Please try again later.');
   }
   
 }
