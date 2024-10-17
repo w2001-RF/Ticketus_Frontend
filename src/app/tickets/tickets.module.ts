@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {DatePipe} from '@angular/common';
 
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
@@ -21,6 +22,7 @@ import { TicketDeleteDialogComponent } from './ticket-delete-dialog/ticket-delet
     TicketFormComponent,
     TicketDeleteDialogComponent
   ],
+  providers: [DatePipe],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -5,6 +5,7 @@ import { Ticket } from '../../models/ticket.model';
 import { TicketDeleteDialogComponent } from '../ticket-delete-dialog/ticket-delete-dialog.component';
 import { TicketFormComponent } from '../ticket-form/ticket-form.component';
 import { PageEvent } from '@angular/material/paginator';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-list',
@@ -17,7 +18,7 @@ export class TicketListComponent implements OnInit {
   pageSize: number = 5;
   pageNumber: number = 1;
 
-  constructor(private ticketService: TicketService, private dialog: MatDialog) {}
+  constructor(private ticketService: TicketService, private dialog: MatDialog, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     console.log("ngOnInit is running");
@@ -28,7 +29,7 @@ export class TicketListComponent implements OnInit {
   loadTickets(): void {
     this.ticketService.getTickets(this.pageNumber, this.pageSize).subscribe({
       next: (ticketResponse) => {
-        this.tickets = ticketResponse.tickets;
+        this.tickets = ticketResponse.tickets
         this.totalCount = ticketResponse.totalCount;
         this.pageSize = ticketResponse.pageSize;
         this.pageNumber = ticketResponse.pageNumber;
@@ -84,5 +85,10 @@ export class TicketListComponent implements OnInit {
     this.pageNumber = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.loadTickets();
+  }
+
+  changeDateFormat(date: Date) {
+    var date = new Date();
+    return this.datePipe.transform(date,"MMM-dd-yyyy");
   }
 }
