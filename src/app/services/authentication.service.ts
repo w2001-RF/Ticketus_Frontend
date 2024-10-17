@@ -30,5 +30,9 @@ export class AuthenticationService {
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
+
+  clearToken(): void {
+    localStorage.removeItem('authToken');
+  }
   
 }
