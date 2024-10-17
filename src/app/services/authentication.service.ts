@@ -15,6 +15,12 @@ export class AuthenticationService {
     this.apiUrl = environment.backendUrl;
   }
 
+  isLoggedIn(): boolean {
+    const authToken = this.getToken();
+
+    return !!authToken;
+  }
+
   login(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
