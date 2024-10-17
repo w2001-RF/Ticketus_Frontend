@@ -7,7 +7,7 @@ import { Ticket } from '../../models/ticket.model';
 @Component({
   selector: 'app-ticket-form',
   templateUrl: './ticket-form.component.html',
-  styleUrls: ['./ticket-form.component.css']
+  styleUrls: ['./ticket-form.component.sass']
 })
 export class TicketFormComponent implements OnInit {
   ticketForm: FormGroup;

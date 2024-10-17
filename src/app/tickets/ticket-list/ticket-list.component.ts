@@ -7,7 +7,7 @@ import { TicketDeleteDialogComponent } from '../ticket-delete-dialog/ticket-dele
 @Component({
   selector: 'app-ticket-list',
   templateUrl: './ticket-list.component.html',
-  styleUrls: ['./ticket-list.component.css']
+  styleUrls: ['./ticket-list.component.sass']
 })
 export class TicketListComponent implements OnInit {
   tickets: Ticket[] = [];
