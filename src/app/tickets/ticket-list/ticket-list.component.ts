@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TicketService } from '../../services/ticket.service';
 import { Ticket } from '../../models/ticket.model';
@@ -6,6 +6,8 @@ import { TicketDeleteDialogComponent } from '../ticket-delete-dialog/ticket-dele
 import { TicketFormComponent } from '../ticket-form/ticket-form.component';
 import { PageEvent } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
+import { MatSort } from '@angular/material/sort'; 
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-ticket-list',
@@ -17,22 +19,33 @@ export class TicketListComponent implements OnInit {
   totalCount: number = 0;
   pageSize: number = 5;
   pageNumber: number = 1;
+  searchQuery: string = "";
+
+  dataSource = new MatTableDataSource<Ticket>();
+  displayedColumns: string[] = ['ticketId', 'description', 'status', 'dateCreated', 'actions'];
+
+  @ViewChild(MatSort) sort: MatSort | null = null;
 
   constructor(private ticketService: TicketService, private dialog: MatDialog, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
-    console.log("ngOnInit is running");
     this.loadTickets();
-    console.log(this.tickets)
   }
 
   loadTickets(): void {
-    this.ticketService.getTickets(this.pageNumber, this.pageSize).subscribe({
+    this.ticketService.getTickets(this.pageNumber, this.pageSize, this.searchQuery).subscribe({
       next: (ticketResponse) => {
         this.tickets = ticketResponse.tickets
         this.totalCount = ticketResponse.totalCount;
         this.pageSize = ticketResponse.pageSize;
         this.pageNumber = ticketResponse.pageNumber;
+        this.dataSource.data = this.tickets;
+
+        if (this.sort) {
+          this.dataSource.sort = this.sort;
+        }
+
+        console.log(this.dataSource.data)
       },
       error: (err) => {
         console.error('Error loading tickets:', err);
@@ -90,5 +103,9 @@ export class TicketListComponent implements OnInit {
   changeDateFormat(date: Date) {
     var date = new Date();
     return this.datePipe.transform(date,"MMM-dd-yyyy");
+  }
+
+  applyFilter(): void {
+    this.loadTickets();
   }
 }

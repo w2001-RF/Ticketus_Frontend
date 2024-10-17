@@ -14,7 +14,7 @@ import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { TicketDeleteDialogComponent } from './ticket-delete-dialog/ticket-delete-dialog.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,7 @@ import { TicketDeleteDialogComponent } from './ticket-delete-dialog/ticket-delet
     MatSelectModule,
     MatCardModule,
     MatPaginatorModule,
+    FormsModule,
     TicketsRoutingModule
   ]
 })

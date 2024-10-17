@@ -27,12 +27,10 @@ export class TicketFormComponent  {
   onSave(): void {
     if (this.ticketForm.valid) {
       if (this.data.ticket) {
-        // Update the ticket if editing
         this.ticketService.updateTicket(this.data.ticket.ticketId, this.ticketForm.value).subscribe(() => {
           this.dialogRef.close(true);
         });
       } else {
-        // Create a new ticket if adding
         const newTicket: Ticket = { ...this.ticketForm.value, dateCreated: new Date() };
         this.ticketService.createTicket(newTicket).subscribe(() => {
           this.dialogRef.close(true);

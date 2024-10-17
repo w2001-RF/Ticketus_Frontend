@@ -24,10 +24,11 @@ export class TicketService {
       .set('Content-Type', 'application/json');
   }
 
-  getTickets(pageNumber: number = 1, pageSize: number = 10): Observable<TicketResponse> {
+  getTickets(pageNumber: number = 1, pageSize: number = 10, searchQuery: string = ""): Observable<TicketResponse> {
     const params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
-      .set('pageSize', pageSize.toString());
+      .set('pageSize', pageSize.toString())
+      .set('searchTerm', searchQuery);
     return this.http.get<TicketResponse>(this.apiUrl, { headers: this.getHeaders(), params}).pipe(
       catchError(this.handleError)
     );
