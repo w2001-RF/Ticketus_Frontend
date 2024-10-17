@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
@@ -29,6 +30,7 @@ import { TicketDeleteDialogComponent } from './ticket-delete-dialog/ticket-delet
     MatDialogModule,
     MatSelectModule,
     MatCardModule,
+    MatPaginatorModule,
     TicketsRoutingModule
   ]
 })

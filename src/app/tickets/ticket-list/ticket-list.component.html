@@ -33,5 +33,11 @@
     </table>
 
     <button mat-raised-button color="primary" (click)="openAddDialog()">Add New</button>
+
+    <mat-paginator [length]="totalCount"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="[5, 10, 25, 50]"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
 </mat-card>
   

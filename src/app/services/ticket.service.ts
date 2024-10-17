@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Ticket } from '../models/ticket.model';
@@ -24,8 +24,11 @@ export class TicketService {
       .set('Content-Type', 'application/json');
   }
 
-  getTickets(): Observable<TicketResponse> {
-    return this.http.get<TicketResponse>(this.apiUrl, { headers: this.getHeaders() }).pipe(
+  getTickets(pageNumber: number = 1, pageSize: number = 10): Observable<TicketResponse> {
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+    return this.http.get<TicketResponse>(this.apiUrl, { headers: this.getHeaders(), params}).pipe(
       catchError(this.handleError)
     );
   }
