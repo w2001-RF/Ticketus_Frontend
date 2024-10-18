@@ -54,6 +54,19 @@ export class AuthenticationService {
     localStorage.removeItem('authToken');
   }
 
+  getUserName(): string {
+    const user = this.getCurrentUser();
+    return user ? user.username : 'Guest';
+  }
+
+  private getCurrentUser() {
+    const userToken = this.getToken();
+    if (userToken) {
+      return JSON.parse(atob(userToken.split('.')[1]));
+    }
+    return null;
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('Client-side error:', error.error.message);
