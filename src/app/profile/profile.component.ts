@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthenticationService,) {
     const currentUser = this.authService.getCurrentUser();
     this.userName = currentUser.username;
-    this.email = currentUser.Email;
+    this.email = currentUser.email;
   }
 
   ngOnInit(): void {}

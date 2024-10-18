@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-
+import { MatIcon } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -37,6 +37,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIcon,
     AppRoutingModule
   ],
   providers: [

@@ -1,4 +1,4 @@
-<div class="contact-container">
+<div class="contact-container m-5">
     <h2>Contact Me</h2>
     <form (submit)="onSubmit()">
       <div class="mb-3">
@@ -13,7 +13,9 @@
         <label for="message" class="form-label">Message</label>
         <textarea class="form-control" id="message" rows="3" [(ngModel)]="message" name="message"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Send Message</button>
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary" style="background-color: #02A459; width: auto">Send Message</button>
+      </div>
     </form>
   </div>
   
