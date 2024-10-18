@@ -1,6 +1,33 @@
-# Ticketus
+# Ticketus Frontend
+
+This is the frontend for the Ticketus web application built using Angular. The frontend provides a user interface for ticket management, user authentication, and settings.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.10.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [Angular CLI](https://angular.io/cli)
+- A running instance of the Ticketus backend API
+
+## Setup Instructions
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/ticketus-frontend.git
+   cd ticketus-frontend
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+
+3. **Configure API URL**
+  * Update the ``environment.ts`` file to point to your backend API:
+   ```typescript
+   export const environment = {
+        production: false,
+        backendUrl: 'http://localhost:5000/api/v1'
+    };
 
 ## Development server
 
