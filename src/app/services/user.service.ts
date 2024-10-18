@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  private apiUrl: string;
+  public apiUrl: string;
   private endPointUser: string = "/Users"
 
 
