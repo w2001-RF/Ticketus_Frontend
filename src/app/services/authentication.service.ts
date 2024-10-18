@@ -59,7 +59,7 @@ export class AuthenticationService {
     return user ? user.username : 'Guest';
   }
 
-  private getCurrentUser() {
+  getCurrentUser() {
     const userToken = this.getToken();
     if (userToken) {
       return JSON.parse(atob(userToken.split('.')[1]));
