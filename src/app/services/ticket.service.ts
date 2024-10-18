@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class TicketService {
-  private apiUrl: string;
+  public apiUrl: string;
   private endPointTickets: string = "/Tickets"
 
   constructor(private http: HttpClient) { 
