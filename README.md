@@ -16,15 +16,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
    ```bash
    git clone https://github.com/yourusername/ticketus-frontend.git
    cd ticketus-frontend
-
 2. **Install Dependencies**
    ```bash
-   npm install
-
+    npm install
 3. **Configure API URL**
   * Update the ``environment.ts`` file to point to your backend API:
-   ```typescript
-   export const environment = {
+    export const environment = {
         production: false,
         backendUrl: 'http://localhost:5000/api/v1'
     };
