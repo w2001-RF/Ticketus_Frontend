@@ -7,8 +7,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -34,6 +36,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatToolbarModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [
