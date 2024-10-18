@@ -15,6 +15,10 @@ export class HeaderComponent {
     return this.authService.getToken() !== null;
   }
 
+  getUserName(): string {
+    return this.authService.getUserName();
+  }
+
   logout(): void {
     this.authService.clearToken();
     this.router.navigate(['/auth/login']);
