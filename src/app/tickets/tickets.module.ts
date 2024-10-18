@@ -9,12 +9,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {DatePipe} from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { TicketDeleteDialogComponent } from './ticket-delete-dialog/ticket-delete-dialog.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
