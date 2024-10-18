@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthenticationService {
 
-  private apiUrl: string;
+  public apiUrl: string;
   private endPointAuthentication: string = "/Authentication"
 
   constructor(private http: HttpClient) { 
