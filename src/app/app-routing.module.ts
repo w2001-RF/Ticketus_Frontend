@@ -18,12 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./tickets/tickets.module').then(m => m.TicketsModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'settings',
-    loadChildren: () => import('./tickets/tickets.module').then(m => m.TicketsModule),
+    component: ProfileComponent,
     canActivate: [AuthGuard]
   },
   {
