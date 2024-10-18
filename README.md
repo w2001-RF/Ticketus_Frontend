@@ -21,6 +21,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     npm install
 3. **Configure API URL**
   * Update the ``environment.ts`` file to point to your backend API:
+    ```bash
     export const environment = {
         production: false,
         backendUrl: 'http://localhost:5000/api/v1'
