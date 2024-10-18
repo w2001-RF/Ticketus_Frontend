@@ -17,14 +17,15 @@ export class SignupComponent {
     private router: Router
   ) {
     this.signupForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      UserName: ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   onSubmit(): void {
     if (this.signupForm.valid) {
+      console.log(this.signupForm.value)
       this.authService.signup(this.signupForm.value).subscribe(() => {
         this.router.navigate(['/login']);
       }, error => {

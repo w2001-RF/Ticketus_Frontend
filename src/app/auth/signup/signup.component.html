@@ -1,30 +1,33 @@
-<mat-card>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username" placeholder="Enter your username" />
-        <mat-error *ngIf="signupForm.get('username')?.hasError('required')">
-          Username is required
-        </mat-error>
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="Enter your email" />
-        <mat-error *ngIf="signupForm.get('email')?.hasError('required')">
-          Email is required
-        </mat-error>
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" placeholder="Enter your password" />
-        <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
-          Password is required
-        </mat-error>
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit">Signup</button>
-    </form>
+<mat-card class="signup-card">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="UserName" placeholder="Enter your username" />
+      <mat-error *ngIf="signupForm.get('UserName')?.hasError('required')">
+        Username is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="Email" placeholder="Enter your email" />
+      <mat-error *ngIf="signupForm.get('Email')?.hasError('required')">
+        Email is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="Password" placeholder="Enter your password" />
+      <mat-error *ngIf="signupForm.get('Password')?.hasError('required')">
+        Password is required
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Sign Up</button>
+
+    <div class="redirect-link">
+      <p>Already have an account? <a routerLink="/login">Login</a></p>
+    </div>
+  </form>
 </mat-card>
-  
