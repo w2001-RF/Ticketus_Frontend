@@ -4,10 +4,22 @@
 .navbar-brand
     font-weight: bold
 
-
 .nav-link
     color: #333 !important
+    transition: color 0.3s ease, transform 0.3s ease
+    &:hover
+        color: #007bff !important
+        transform: scale(1.1)
 
+    &:active
+        transform: scale(0.95)
 
 .dropdown-item
     color: #333 !important
+    transition: color 0.3s ease, transform 0.3s ease
+    &:hover
+        color: #007bff !important
+        transform: scale(1.05)
+
+    &:active
+        transform: scale(0.95)
